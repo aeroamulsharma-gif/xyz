@@ -159,7 +159,13 @@ class GoogleFormFiller:
         return f"{username}@gmail.com"
 
     def setup_driver(self, headless):
+        #
         chrome_options = Options()
+    
+        # --- CHANGE 1: Explicit Chromium path ---
+        chrome_options.binary_location = "/usr/bin/chromium"
+    
+        # --- CHANGE 3: Recommended argument list ---
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
@@ -171,8 +177,6 @@ class GoogleFormFiller:
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_argument("--no-first-run")
         chrome_options.add_argument("--no-default-browser-check")
-        chrome_options.add_argument("--single-process")
-        chrome_options.add_argument("--disable-features=VizDisplayCompositor")
         chrome_options.add_argument("--remote-debugging-port=9222")
 
         mobile_agents = [
